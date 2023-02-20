@@ -336,9 +336,9 @@ def load_dataset(fname):
     return dataset
 
 
-def main():
+def run_from_terminal():
     if len(sys.argv) != 3:
-        __print_inf("Usage: ./parser.py <input.txt> <output.json>")
+        print("Usage: eplan_parser <input.txt> <output.json>")
         return
 
     # Load the dataset
@@ -347,6 +347,3 @@ def main():
     # Export the dataset
     export_to_json(sys.argv[2], dataset)
 
-
-if __name__ == '__main__':
-    main()

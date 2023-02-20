@@ -20,5 +20,8 @@ classifiers = [
 	"Topic :: Scientific/Engineering",
 ]
 
+[project.scripts]
+eplan_parser = "eplan_parser.output_parser:run_from_terminal"
+
 [project.urls]
-"Homepage" = ""
+"Homepage" = "https://github.com/AlexSartori/eplan_parser"
