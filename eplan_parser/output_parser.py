@@ -48,7 +48,7 @@ def parse_res_share(lines, index):
     idx = index['RES Share']
     for i in range(3):
         l, v, _ = lines[idx+i+1].split('\t', 2)
-        data[l] = float(v)
+        data[l.strip()] = float(v.replace(',', '.'))
 
     return data
 
@@ -79,8 +79,8 @@ def parse_fuel_annual(lines, index):
             break
         else:
             data[label] = {}
-            data[label]['total'] = float(total)
-            data[label]['household'] = float(household) if household.strip() else ''
+            data[label]['total'] = float(total.replace(',', '.'))
+            data[label]['household'] = float(household.replace(',', '.')) if household.strip() else ''
 
     return data
 
@@ -114,9 +114,9 @@ def parse_annual_costs(lines, index):
 
         if label:
             data[label] = {}
-            data[label]['total'] = float(tot) if tot.strip() else ''
-            data[label]['variable'] = float(var) if var.strip() else ''
-            data[label]['breakdown'] = float(bd) if bd.strip() else ''
+            data[label]['total'] = float(tot.replace(',', '.')) if tot.strip() else ''
+            data[label]['variable'] = float(var.replace(',', '.')) if var.strip() else ''
+            data[label]['breakdown'] = float(bd.replace(',', '.')) if bd.strip() else ''
         
         if label == 'TOTAL ANNUAL COSTS':
             break
@@ -138,7 +138,7 @@ def parse_yearly_totals(lines, index):
     annual_totals = lines[idx+1].strip().split('\t')[1:]
     for i, v in enumerate(annual_totals):
         col = header[i]
-        data[col]['Annual Total'] = float(v) if v.strip() != 'Percent' else v.strip()
+        data[col]['Annual Total'] = float(v.replace(',', '.')) if v.strip() != 'Percent' else v.strip()
     
     # Parse monthly totals
     if not check_index(lines, index, 'Monthly Totals'):
@@ -164,7 +164,7 @@ def parse_yearly_totals(lines, index):
     for i in range(3):
         l = lines[idx+i].strip().split('\t')
         label = l[0].strip()
-        vals = list(float(v) if v.strip() != '-' else '-' for v in l[1:])
+        vals = list(float(v.replace(',', '.')) if v.strip() != '-' else '-' for v in l[1:])
         
         for i, v in enumerate(vals):
             col = header[i]
@@ -232,7 +232,7 @@ def parse_fuel_balance(lines, index):
     
     for i in range(9):
         l = [f.strip() for f in lines[idx+i+1].split('\t')[col_0:]]
-        label, vals = l[0], [float(v) for v in l[1:]]
+        label, vals = l[0], [float(v.replace(',', '.')) for v in l[1:]]
         print(label)
 
         for i, v in enumerate(vals):
