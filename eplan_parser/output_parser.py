@@ -34,8 +34,8 @@ def parse_co2_data(lines, index):
         __print_err("CO2 section has an unexpected format")
         return None
 
-    data['total'] = int(val_1.replace('.', '').replace(',', ''))
-    data['corrected'] = int(val_2.replace('.', '').replace(',', ''))
+    data['total'] = int(val_1.replace(',', '.'))
+    data['corrected'] = int(val_2.replace(',', '.'))
     return data
 
 
