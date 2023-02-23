@@ -38,6 +38,12 @@ co2_emission = data['CO2 Emissions']['total']
 print(co2_emission)
 ```
 
+## Compatibility
+
+Tested on EnergyPLAN versions:
+
+- 16.2
+
 ---
 
 *If you've used this script and found it useful, please let me know if you got any errors or had good compatibility, especially if you're using a different version of EnergyPLAN.*
