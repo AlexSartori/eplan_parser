@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import re, sys, json
+import os.path
 
 
 def __print_err(msg):
@@ -193,7 +194,7 @@ def parse_hourly_totals(lines, index):
     
     return data
 
-    
+
 def get_yearly_totals_header(lines, index):
     if not check_index(lines, index, 'Yearly Totals'):
         __print_err('Cannot find header for Yearly Totals in index')
@@ -257,9 +258,12 @@ def export_to_json(fname, dataset):
 def read_energyplan_file(fname):
     lines = []
     
-    with open(fname, encoding='iso-8859-15') as f:
-        lines = f.readlines()
-        __print_suc('Read %d lines from "%s"' % (len(lines), fname))
+    if os.path.exists(fname) and os.path.isfile(fname):
+        with open(fname, encoding='iso-8859-15') as f:
+            lines = f.readlines()
+            __print_suc('Read %d lines from "%s"' % (len(lines), fname))
+    else:
+        __print_err('File "%s" does not exist or is not a file' % fname)
 
     return lines
 
@@ -346,4 +350,3 @@ def run_from_terminal():
 
     # Export the dataset
     export_to_json(sys.argv[2], dataset)
-
